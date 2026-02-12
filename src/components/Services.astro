@@ -26,14 +26,14 @@ const services = [
 
 <section id="services" class="py-24 bg-slate-950">
   <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 animate-on-scroll">
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">World-Class Services</h2>
       <p class="text-slate-400 max-w-2xl mx-auto">We use only professional-grade products to ensure lasting results for your vehicle.</p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      {services.map(s => (
-        <a href={s.href} class="block p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500 hover:bg-slate-900/80 transition-all group">
+      {services.map((s, index) => (
+        <a href={s.href} class={`block p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500 hover:bg-slate-900/80 transition-all group animate-on-scroll delay-${(index + 1) * 100}`}>
           <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
             <!-- Icon placeholder -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
