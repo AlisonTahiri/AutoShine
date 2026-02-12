@@ -1,0 +1,35 @@
+---
+const features = [
+  "Lifetime Warranty",
+  "Certified Installers",
+  "Same Day Service",
+  "Premium Materials"
+];
+---
+
+<section id="features" class="py-24 bg-slate-900 border-y border-slate-800">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="md:w-1/2">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Why Choose AutoShine?</h2>
+        <p class="text-slate-400 mb-8 text-lg">We don't just clean cars; we restore them. Our attention to detail is unmatched, ensuring you drive away feeling brand new.</p>
+        
+        <ul class="space-y-4">
+          {features.map(f => (
+            <li class="flex items-center text-slate-300">
+              <svg class="w-5 h-5 mr-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="md:w-1/2">
+        <img 
+          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2670&auto=format&fit=crop"  
+          alt="Precision Work" 
+          class="rounded-2xl shadow-2xl border border-slate-800"
+        />
+      </div>
+    </div>
+  </div>
+</section>
