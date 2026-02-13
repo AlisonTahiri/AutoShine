@@ -1,0 +1,94 @@
+---
+interface Props {
+    before: string;
+    after: string;
+    title: string;
+}
+
+const { before, after, title } = Astro.props;
+---
+
+<div
+    class="relative w-full aspect-video rounded-2xl overflow-hidden cursor-ew-resize select-none group border border-slate-800 shadow-2xl animate-on-scroll"
+>
+    <!-- After Image (Base) -->
+    <img
+        src={after}
+        alt={`After ${title}`}
+        class="absolute inset-0 w-full h-full object-cover"
+        draggable="false"
+    />
+
+    <div
+        class="absolute top-4 right-4 bg-blue-600/90 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 pointer-events-none"
+    >
+        AFTER
+    </div>
+
+    <!-- Before Image (Overlay) -->
+    <div
+        class="absolute inset-0 w-full h-full overflow-hidden"
+        style="clip-path: inset(0 50% 0 0);"
+        id="before-image-container"
+    >
+        <img
+            src={before}
+            alt={`Before ${title}`}
+            class="absolute inset-0 w-full h-full object-cover"
+            draggable="false"
+        />
+        <div
+            class="absolute top-4 left-4 bg-black/70 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 pointer-events-none"
+        >
+            BEFORE
+        </div>
+    </div>
+
+    <!-- Slider Handle -->
+    <div
+        class="absolute inset-y-0 left-1/2 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center transition-transform hover:scale-110"
+        id="slider-handle"
+    >
+        <div
+            class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center shadow-lg"
+        >
+            <svg
+                class="w-4 h-4 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 9l-4 3 4 3m8-6l4 3-4 3"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Input Range (Invisible interaction layer) -->
+    <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+        oninput="updateSlider(this)"
+        aria-label={`Compare ${title}`}
+    />
+</div>
+
+<script is:inline>
+    function updateSlider(input) {
+        const container = input.parentElement;
+        const beforeImage = container.querySelector("#before-image-container");
+        const handle = container.querySelector("#slider-handle");
+        const val = input.value;
+
+        if (beforeImage && handle) {
+            beforeImage.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+            handle.style.left = `${val}%`;
+        }
+    }
+</script>
